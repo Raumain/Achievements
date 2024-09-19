@@ -14,16 +14,16 @@ The main goal of this application is to track achievements thanks to a visual la
 
 ## Roadmap
 
-- [] Create a personnal dashboard 
-    - [] Add authentication with Convex
-    - [] Add/Update/Delete achievements
-    - [] Choose what temporality a box represent (day/week/month)
-    - [] Mark a box as succeded or failed
+- [ ] Create a personnal dashboard 
+    - [ ] Add authentication with Convex
+    - [ ] Add/Update/Delete achievements
+    - [ ] Choose what temporality a box represent (day/week/month)
+    - [ ] Mark a box as succeded or failed
 
-- [] Display every achievements
-- [] Display informations on boxes hover 
+- [ ] Display every achievements
+- [ ] Display informations on boxes hover 
 
-- [] Send a reminder to fill the box at every temporality chosen for a given achievement (PWA notification ? Mail ? Other ?)
+- [ ] Send a reminder to fill the box at every temporality chosen for a given achievement (PWA notification ? Mail ? Other ?)
 
 
 
