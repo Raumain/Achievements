@@ -18,6 +18,9 @@ import type {
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
 import type * as running from "../running.js";
+import type * as schemas_achievements from "../schemas/achievements.js";
+import type * as schemas_index from "../schemas/index.js";
+import type * as schemas_running from "../schemas/running.js";
 import type * as users from "../users.js";
 
 /**
@@ -32,6 +35,9 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   http: typeof http;
   running: typeof running;
+  "schemas/achievements": typeof schemas_achievements;
+  "schemas/index": typeof schemas_index;
+  "schemas/running": typeof schemas_running;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

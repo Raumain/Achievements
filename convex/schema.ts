@@ -1,14 +1,9 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema } from "convex/server";
 import { authTables } from "@convex-dev/auth/server";
+import { achievements, running } from "./schemas";
 
 export default defineSchema({
 	...authTables,
-	running: defineTable({
-		weekNumber: v.number(),
-		isFilled: v.boolean(),
-		month: v.string(),
-		startDate: v.string(),
-		endDate: v.string(),
-	}),
+	...running,
+	...achievements,
 });
