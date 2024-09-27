@@ -10,192 +10,213 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as LoginImport } from './routes/login'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as IndexImport } from './routes/index'
-import { Route as AuthSettingsImport } from './routes/_auth.settings'
-import { Route as AuthSettingsUserImport } from './routes/_auth.settings.user'
-import { Route as AuthSettingsDashboardImport } from './routes/_auth.settings.dashboard'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as LoginImport } from "./routes/login";
+import { Route as AuthImport } from "./routes/_auth";
+import { Route as IndexImport } from "./routes/index";
+import { Route as AuthSettingsImport } from "./routes/_auth.settings";
+import { Route as AuthSettingsUserImport } from "./routes/_auth.settings.user";
+import { Route as AuthSettingsDashboardImport } from "./routes/_auth.settings.dashboard";
+import { Route as AuthSettingsDashboardIdImport } from "./routes/_auth.settings.dashboard_.$id";
 
 // Create/Update Routes
 
 const LoginRoute = LoginImport.update({
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/login",
+	getParentRoute: () => rootRoute,
+});
 
 const AuthRoute = AuthImport.update({
-  id: '/_auth',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: "/_auth",
+	getParentRoute: () => rootRoute,
+});
 
 const IndexRoute = IndexImport.update({
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/",
+	getParentRoute: () => rootRoute,
+});
 
 const AuthSettingsRoute = AuthSettingsImport.update({
-  path: '/settings',
-  getParentRoute: () => AuthRoute,
-} as any)
+	path: "/settings",
+	getParentRoute: () => AuthRoute,
+});
 
 const AuthSettingsUserRoute = AuthSettingsUserImport.update({
-  path: '/user',
-  getParentRoute: () => AuthSettingsRoute,
-} as any)
+	path: "/user",
+	getParentRoute: () => AuthSettingsRoute,
+});
 
 const AuthSettingsDashboardRoute = AuthSettingsDashboardImport.update({
-  path: '/dashboard',
-  getParentRoute: () => AuthSettingsRoute,
-} as any)
+	path: "/dashboard",
+	getParentRoute: () => AuthSettingsRoute,
+});
+
+const AuthSettingsDashboardIdRoute = AuthSettingsDashboardIdImport.update({
+	path: "/dashboard/$id",
+	getParentRoute: () => AuthSettingsRoute,
+});
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/settings': {
-      id: '/_auth/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthSettingsImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/settings/dashboard': {
-      id: '/_auth/settings/dashboard'
-      path: '/dashboard'
-      fullPath: '/settings/dashboard'
-      preLoaderRoute: typeof AuthSettingsDashboardImport
-      parentRoute: typeof AuthSettingsImport
-    }
-    '/_auth/settings/user': {
-      id: '/_auth/settings/user'
-      path: '/user'
-      fullPath: '/settings/user'
-      preLoaderRoute: typeof AuthSettingsUserImport
-      parentRoute: typeof AuthSettingsImport
-    }
-  }
+declare module "@tanstack/react-router" {
+	interface FileRoutesByPath {
+		"/": {
+			id: "/";
+			path: "/";
+			fullPath: "/";
+			preLoaderRoute: typeof IndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/_auth": {
+			id: "/_auth";
+			path: "";
+			fullPath: "";
+			preLoaderRoute: typeof AuthImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/login": {
+			id: "/login";
+			path: "/login";
+			fullPath: "/login";
+			preLoaderRoute: typeof LoginImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/_auth/settings": {
+			id: "/_auth/settings";
+			path: "/settings";
+			fullPath: "/settings";
+			preLoaderRoute: typeof AuthSettingsImport;
+			parentRoute: typeof AuthImport;
+		};
+		"/_auth/settings/dashboard": {
+			id: "/_auth/settings/dashboard";
+			path: "/dashboard";
+			fullPath: "/settings/dashboard";
+			preLoaderRoute: typeof AuthSettingsDashboardImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+		"/_auth/settings/user": {
+			id: "/_auth/settings/user";
+			path: "/user";
+			fullPath: "/settings/user";
+			preLoaderRoute: typeof AuthSettingsUserImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+		"/_auth/settings/dashboard/$id": {
+			id: "/_auth/settings/dashboard/$id";
+			path: "/dashboard/$id";
+			fullPath: "/settings/dashboard/$id";
+			preLoaderRoute: typeof AuthSettingsDashboardIdImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+	}
 }
 
 // Create and export the route tree
 
 interface AuthSettingsRouteChildren {
-  AuthSettingsDashboardRoute: typeof AuthSettingsDashboardRoute
-  AuthSettingsUserRoute: typeof AuthSettingsUserRoute
+	AuthSettingsDashboardRoute: typeof AuthSettingsDashboardRoute;
+	AuthSettingsUserRoute: typeof AuthSettingsUserRoute;
+	AuthSettingsDashboardIdRoute: typeof AuthSettingsDashboardIdRoute;
 }
 
 const AuthSettingsRouteChildren: AuthSettingsRouteChildren = {
-  AuthSettingsDashboardRoute: AuthSettingsDashboardRoute,
-  AuthSettingsUserRoute: AuthSettingsUserRoute,
-}
+	AuthSettingsDashboardRoute: AuthSettingsDashboardRoute,
+	AuthSettingsUserRoute: AuthSettingsUserRoute,
+	AuthSettingsDashboardIdRoute: AuthSettingsDashboardIdRoute,
+};
 
 const AuthSettingsRouteWithChildren = AuthSettingsRoute._addFileChildren(
-  AuthSettingsRouteChildren,
-)
+	AuthSettingsRouteChildren,
+);
 
 interface AuthRouteChildren {
-  AuthSettingsRoute: typeof AuthSettingsRouteWithChildren
+	AuthSettingsRoute: typeof AuthSettingsRouteWithChildren;
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthSettingsRoute: AuthSettingsRouteWithChildren,
-}
+	AuthSettingsRoute: AuthSettingsRouteWithChildren,
+};
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/settings': typeof AuthSettingsRouteWithChildren
-  '/settings/dashboard': typeof AuthSettingsDashboardRoute
-  '/settings/user': typeof AuthSettingsUserRoute
+	"/": typeof IndexRoute;
+	"": typeof AuthRouteWithChildren;
+	"/login": typeof LoginRoute;
+	"/settings": typeof AuthSettingsRouteWithChildren;
+	"/settings/dashboard": typeof AuthSettingsDashboardRoute;
+	"/settings/user": typeof AuthSettingsUserRoute;
+	"/settings/dashboard/$id": typeof AuthSettingsDashboardIdRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/settings': typeof AuthSettingsRouteWithChildren
-  '/settings/dashboard': typeof AuthSettingsDashboardRoute
-  '/settings/user': typeof AuthSettingsUserRoute
+	"/": typeof IndexRoute;
+	"": typeof AuthRouteWithChildren;
+	"/login": typeof LoginRoute;
+	"/settings": typeof AuthSettingsRouteWithChildren;
+	"/settings/dashboard": typeof AuthSettingsDashboardRoute;
+	"/settings/user": typeof AuthSettingsUserRoute;
+	"/settings/dashboard/$id": typeof AuthSettingsDashboardIdRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/_auth/settings': typeof AuthSettingsRouteWithChildren
-  '/_auth/settings/dashboard': typeof AuthSettingsDashboardRoute
-  '/_auth/settings/user': typeof AuthSettingsUserRoute
+	__root__: typeof rootRoute;
+	"/": typeof IndexRoute;
+	"/_auth": typeof AuthRouteWithChildren;
+	"/login": typeof LoginRoute;
+	"/_auth/settings": typeof AuthSettingsRouteWithChildren;
+	"/_auth/settings/dashboard": typeof AuthSettingsDashboardRoute;
+	"/_auth/settings/user": typeof AuthSettingsUserRoute;
+	"/_auth/settings/dashboard/$id": typeof AuthSettingsDashboardIdRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | ''
-    | '/login'
-    | '/settings'
-    | '/settings/dashboard'
-    | '/settings/user'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | ''
-    | '/login'
-    | '/settings'
-    | '/settings/dashboard'
-    | '/settings/user'
-  id:
-    | '__root__'
-    | '/'
-    | '/_auth'
-    | '/login'
-    | '/_auth/settings'
-    | '/_auth/settings/dashboard'
-    | '/_auth/settings/user'
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath;
+	fullPaths:
+		| "/"
+		| ""
+		| "/login"
+		| "/settings"
+		| "/settings/dashboard"
+		| "/settings/user"
+		| "/settings/dashboard/$id";
+	fileRoutesByTo: FileRoutesByTo;
+	to:
+		| "/"
+		| ""
+		| "/login"
+		| "/settings"
+		| "/settings/dashboard"
+		| "/settings/user"
+		| "/settings/dashboard/$id";
+	id:
+		| "__root__"
+		| "/"
+		| "/_auth"
+		| "/login"
+		| "/_auth/settings"
+		| "/_auth/settings/dashboard"
+		| "/_auth/settings/user"
+		| "/_auth/settings/dashboard/$id";
+	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
-  LoginRoute: typeof LoginRoute
+	IndexRoute: typeof IndexRoute;
+	AuthRoute: typeof AuthRouteWithChildren;
+	LoginRoute: typeof LoginRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuthRoute: AuthRouteWithChildren,
-  LoginRoute: LoginRoute,
-}
+	IndexRoute: IndexRoute,
+	AuthRoute: AuthRouteWithChildren,
+	LoginRoute: LoginRoute,
+};
 
 export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+	._addFileChildren(rootRouteChildren)
+	._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
@@ -227,7 +248,8 @@ export const routeTree = rootRoute
       "parent": "/_auth",
       "children": [
         "/_auth/settings/dashboard",
-        "/_auth/settings/user"
+        "/_auth/settings/user",
+        "/_auth/settings/dashboard/$id"
       ]
     },
     "/_auth/settings/dashboard": {
@@ -236,6 +258,10 @@ export const routeTree = rootRoute
     },
     "/_auth/settings/user": {
       "filePath": "_auth.settings.user.tsx",
+      "parent": "/_auth/settings"
+    },
+    "/_auth/settings/dashboard/$id": {
+      "filePath": "_auth.settings.dashboard_.$id.tsx",
       "parent": "/_auth/settings"
     }
   }
