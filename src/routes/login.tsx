@@ -1,13 +1,14 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { SignIn } from "../components/SignInButton";
+import { AuthButton } from "../components/AuthButton";
 
 export const Route = createFileRoute("/login")({
 	component: () => <Login />,
 });
 
 const Login = () => {
+	const { isAuthenticated } = useConvexAuth();
 	const user = useQuery(api.users.get);
 	return (
 		<div className="h-full">
@@ -49,7 +50,7 @@ const Login = () => {
 							</div>
 						</form>
 						<div className="divider">OR</div>
-						<SignIn />
+						<AuthButton isLogged={isAuthenticated} />
 						<p className="mt-4 text-center">
 							{user ? "Don't have an account? " : "Already have an account? "}
 							<Link to="" className="link link-primary">

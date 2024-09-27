@@ -1,18 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { SignIn } from "../components/SignInButton";
+import { Menu } from "../components/Menu";
+import { AuthButton } from "../components/AuthButton";
 
 export const Route = createFileRoute("/")({
 	component: HomeComponent,
 });
 
 function HomeComponent() {
+	const { isAuthenticated } = useConvexAuth();
 	const boxes = useQuery(api.running.get);
 	const user = useQuery(api.users.get);
 	return (
 		<div className="p-2">
-			<SignIn />
+			<Menu />
+			<AuthButton isLogged={isAuthenticated} />
 			<div className="flex flex-col items-center p-4">
 				<h1 className="font-bold text-4xl">Welcome to Achievements</h1>
 				{user && (
