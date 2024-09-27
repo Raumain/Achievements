@@ -24,7 +24,6 @@ declare module "@tanstack/react-router" {
 
 function InnerApp() {
 	const auth = useConvexAuth();
-	console.log(auth)
 	return <RouterProvider router={router} context={{ auth }} />;
 }
 
