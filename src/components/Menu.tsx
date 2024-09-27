@@ -6,7 +6,9 @@ import {
 	UserIcon,
 } from "../assets/icons";
 import { useLocation } from "@tanstack/react-router";
+import { useConvexAuth } from "convex/react";
 export const Menu = () => {
+	const { isAuthenticated } = useConvexAuth();
 	const pathname = useLocation().pathname;
 	return (
 		<div className="top-4 left-4 z-50 fixed">
@@ -22,7 +24,13 @@ export const Menu = () => {
 						/>
 					</>
 				) : (
-					<Tab link="/settings/user" icon={<SettingsIcon />} text="Settings" />
+					isAuthenticated && (
+						<Tab
+							link="/settings/user"
+							icon={<SettingsIcon />}
+							text="Settings"
+						/>
+					)
 				)}
 			</div>
 		</div>
