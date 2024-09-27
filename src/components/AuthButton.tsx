@@ -13,7 +13,9 @@ export function AuthButton({ isLogged }: { isLogged: boolean }) {
 			disabled={isBusy}
 			onClick={() => {
 				setIsBusy(true);
-				isLogged ? void signOut() : void signIn("github");
+				isLogged
+					? void signOut().then(() => setIsBusy(false))
+					: void signIn("github").then(() => setIsBusy(false));
 			}}
 		>
 			{isBusy ? (
