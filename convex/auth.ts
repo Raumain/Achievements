@@ -10,7 +10,6 @@ export const { auth, signIn, signOut, store } = convexAuth({
 					name: githubProfile.name,
 					email: githubProfile.email,
 					image: githubProfile.avatar_url,
-					githubId: githubProfile.id,
 				};
 			},
 		}),
