@@ -5,6 +5,7 @@ export const achievements = {
 	achievements: defineTable({
 		name: v.string(),
 		description: v.string(),
+		category: v.optional(v.string()),
 		timeInterval: v.string(),
 		from: v.string(),
 		to: v.string(),
