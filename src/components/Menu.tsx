@@ -18,9 +18,9 @@ export const Menu = () => {
 					<>
 						<Tab link="/settings/user" icon={<UserIcon />} text="User" />
 						<Tab
-							link="/settings/dashboard"
+							link="/settings/achievements"
 							icon={<DashboardIcon />}
-							text="Dashboard"
+							text="Achievements"
 						/>
 					</>
 				) : (
