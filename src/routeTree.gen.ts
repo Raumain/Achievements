@@ -10,215 +10,237 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as LoginImport } from './routes/login'
-import { Route as AuthImport } from './routes/_auth'
-import { Route as IndexImport } from './routes/index'
-import { Route as AuthSettingsImport } from './routes/_auth.settings'
-import { Route as AuthSettingsUserImport } from './routes/_auth.settings.user'
-import { Route as AuthSettingsAchievementsImport } from './routes/_auth.settings.achievements'
-import { Route as AuthSettingsAchievementsIdImport } from './routes/_auth.settings.achievements_.$id'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as LoginImport } from "./routes/login";
+import { Route as AuthImport } from "./routes/_auth";
+import { Route as IndexImport } from "./routes/index";
+import { Route as AuthSettingsImport } from "./routes/_auth.settings";
+import { Route as AuthSettingsUserImport } from "./routes/_auth.settings.user";
+import { Route as AuthSettingsAchievementsImport } from "./routes/_auth.settings.achievements";
+import { Route as AuthSettingsAchievementsCreateImport } from "./routes/_auth.settings.achievements_.create";
+import { Route as AuthSettingsAchievementsIdImport } from "./routes/_auth.settings.achievements_.$id";
 
 // Create/Update Routes
 
 const LoginRoute = LoginImport.update({
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/login",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AuthRoute = AuthImport.update({
-  id: '/_auth',
-  getParentRoute: () => rootRoute,
-} as any)
+	id: "/_auth",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const IndexRoute = IndexImport.update({
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
+	path: "/",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AuthSettingsRoute = AuthSettingsImport.update({
-  path: '/settings',
-  getParentRoute: () => AuthRoute,
-} as any)
+	path: "/settings",
+	getParentRoute: () => AuthRoute,
+} as any);
 
 const AuthSettingsUserRoute = AuthSettingsUserImport.update({
-  path: '/user',
-  getParentRoute: () => AuthSettingsRoute,
-} as any)
+	path: "/user",
+	getParentRoute: () => AuthSettingsRoute,
+} as any);
 
 const AuthSettingsAchievementsRoute = AuthSettingsAchievementsImport.update({
-  path: '/achievements',
-  getParentRoute: () => AuthSettingsRoute,
-} as any)
+	path: "/achievements",
+	getParentRoute: () => AuthSettingsRoute,
+} as any);
+
+const AuthSettingsAchievementsCreateRoute =
+	AuthSettingsAchievementsCreateImport.update({
+		path: "/achievements/create",
+		getParentRoute: () => AuthSettingsRoute,
+	} as any);
 
 const AuthSettingsAchievementsIdRoute = AuthSettingsAchievementsIdImport.update(
-  {
-    path: '/achievements/$id',
-    getParentRoute: () => AuthSettingsRoute,
-  } as any,
-)
+	{
+		path: "/achievements/$id",
+		getParentRoute: () => AuthSettingsRoute,
+	} as any,
+);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof AuthImport
-      parentRoute: typeof rootRoute
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
-      parentRoute: typeof rootRoute
-    }
-    '/_auth/settings': {
-      id: '/_auth/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthSettingsImport
-      parentRoute: typeof AuthImport
-    }
-    '/_auth/settings/achievements': {
-      id: '/_auth/settings/achievements'
-      path: '/achievements'
-      fullPath: '/settings/achievements'
-      preLoaderRoute: typeof AuthSettingsAchievementsImport
-      parentRoute: typeof AuthSettingsImport
-    }
-    '/_auth/settings/user': {
-      id: '/_auth/settings/user'
-      path: '/user'
-      fullPath: '/settings/user'
-      preLoaderRoute: typeof AuthSettingsUserImport
-      parentRoute: typeof AuthSettingsImport
-    }
-    '/_auth/settings/achievements/$id': {
-      id: '/_auth/settings/achievements/$id'
-      path: '/achievements/$id'
-      fullPath: '/settings/achievements/$id'
-      preLoaderRoute: typeof AuthSettingsAchievementsIdImport
-      parentRoute: typeof AuthSettingsImport
-    }
-  }
+declare module "@tanstack/react-router" {
+	interface FileRoutesByPath {
+		"/": {
+			id: "/";
+			path: "/";
+			fullPath: "/";
+			preLoaderRoute: typeof IndexImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/_auth": {
+			id: "/_auth";
+			path: "";
+			fullPath: "";
+			preLoaderRoute: typeof AuthImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/login": {
+			id: "/login";
+			path: "/login";
+			fullPath: "/login";
+			preLoaderRoute: typeof LoginImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/_auth/settings": {
+			id: "/_auth/settings";
+			path: "/settings";
+			fullPath: "/settings";
+			preLoaderRoute: typeof AuthSettingsImport;
+			parentRoute: typeof AuthImport;
+		};
+		"/_auth/settings/achievements": {
+			id: "/_auth/settings/achievements";
+			path: "/achievements";
+			fullPath: "/settings/achievements";
+			preLoaderRoute: typeof AuthSettingsAchievementsImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+		"/_auth/settings/user": {
+			id: "/_auth/settings/user";
+			path: "/user";
+			fullPath: "/settings/user";
+			preLoaderRoute: typeof AuthSettingsUserImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+		"/_auth/settings/achievements/$id": {
+			id: "/_auth/settings/achievements/$id";
+			path: "/achievements/$id";
+			fullPath: "/settings/achievements/$id";
+			preLoaderRoute: typeof AuthSettingsAchievementsIdImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+		"/_auth/settings/achievements/create": {
+			id: "/_auth/settings/achievements/create";
+			path: "/achievements/create";
+			fullPath: "/settings/achievements/create";
+			preLoaderRoute: typeof AuthSettingsAchievementsCreateImport;
+			parentRoute: typeof AuthSettingsImport;
+		};
+	}
 }
 
 // Create and export the route tree
 
 interface AuthSettingsRouteChildren {
-  AuthSettingsAchievementsRoute: typeof AuthSettingsAchievementsRoute
-  AuthSettingsUserRoute: typeof AuthSettingsUserRoute
-  AuthSettingsAchievementsIdRoute: typeof AuthSettingsAchievementsIdRoute
+	AuthSettingsAchievementsRoute: typeof AuthSettingsAchievementsRoute;
+	AuthSettingsUserRoute: typeof AuthSettingsUserRoute;
+	AuthSettingsAchievementsIdRoute: typeof AuthSettingsAchievementsIdRoute;
+	AuthSettingsAchievementsCreateRoute: typeof AuthSettingsAchievementsCreateRoute;
 }
 
 const AuthSettingsRouteChildren: AuthSettingsRouteChildren = {
-  AuthSettingsAchievementsRoute: AuthSettingsAchievementsRoute,
-  AuthSettingsUserRoute: AuthSettingsUserRoute,
-  AuthSettingsAchievementsIdRoute: AuthSettingsAchievementsIdRoute,
-}
+	AuthSettingsAchievementsRoute: AuthSettingsAchievementsRoute,
+	AuthSettingsUserRoute: AuthSettingsUserRoute,
+	AuthSettingsAchievementsIdRoute: AuthSettingsAchievementsIdRoute,
+	AuthSettingsAchievementsCreateRoute: AuthSettingsAchievementsCreateRoute,
+};
 
 const AuthSettingsRouteWithChildren = AuthSettingsRoute._addFileChildren(
-  AuthSettingsRouteChildren,
-)
+	AuthSettingsRouteChildren,
+);
 
 interface AuthRouteChildren {
-  AuthSettingsRoute: typeof AuthSettingsRouteWithChildren
+	AuthSettingsRoute: typeof AuthSettingsRouteWithChildren;
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
-  AuthSettingsRoute: AuthSettingsRouteWithChildren,
-}
+	AuthSettingsRoute: AuthSettingsRouteWithChildren,
+};
 
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/settings': typeof AuthSettingsRouteWithChildren
-  '/settings/achievements': typeof AuthSettingsAchievementsRoute
-  '/settings/user': typeof AuthSettingsUserRoute
-  '/settings/achievements/$id': typeof AuthSettingsAchievementsIdRoute
+	"/": typeof IndexRoute;
+	"": typeof AuthRouteWithChildren;
+	"/login": typeof LoginRoute;
+	"/settings": typeof AuthSettingsRouteWithChildren;
+	"/settings/achievements": typeof AuthSettingsAchievementsRoute;
+	"/settings/user": typeof AuthSettingsUserRoute;
+	"/settings/achievements/$id": typeof AuthSettingsAchievementsIdRoute;
+	"/settings/achievements/create": typeof AuthSettingsAchievementsCreateRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/settings': typeof AuthSettingsRouteWithChildren
-  '/settings/achievements': typeof AuthSettingsAchievementsRoute
-  '/settings/user': typeof AuthSettingsUserRoute
-  '/settings/achievements/$id': typeof AuthSettingsAchievementsIdRoute
+	"/": typeof IndexRoute;
+	"": typeof AuthRouteWithChildren;
+	"/login": typeof LoginRoute;
+	"/settings": typeof AuthSettingsRouteWithChildren;
+	"/settings/achievements": typeof AuthSettingsAchievementsRoute;
+	"/settings/user": typeof AuthSettingsUserRoute;
+	"/settings/achievements/$id": typeof AuthSettingsAchievementsIdRoute;
+	"/settings/achievements/create": typeof AuthSettingsAchievementsCreateRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_auth': typeof AuthRouteWithChildren
-  '/login': typeof LoginRoute
-  '/_auth/settings': typeof AuthSettingsRouteWithChildren
-  '/_auth/settings/achievements': typeof AuthSettingsAchievementsRoute
-  '/_auth/settings/user': typeof AuthSettingsUserRoute
-  '/_auth/settings/achievements/$id': typeof AuthSettingsAchievementsIdRoute
+	__root__: typeof rootRoute;
+	"/": typeof IndexRoute;
+	"/_auth": typeof AuthRouteWithChildren;
+	"/login": typeof LoginRoute;
+	"/_auth/settings": typeof AuthSettingsRouteWithChildren;
+	"/_auth/settings/achievements": typeof AuthSettingsAchievementsRoute;
+	"/_auth/settings/user": typeof AuthSettingsUserRoute;
+	"/_auth/settings/achievements/$id": typeof AuthSettingsAchievementsIdRoute;
+	"/_auth/settings/achievements/create": typeof AuthSettingsAchievementsCreateRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | ''
-    | '/login'
-    | '/settings'
-    | '/settings/achievements'
-    | '/settings/user'
-    | '/settings/achievements/$id'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | ''
-    | '/login'
-    | '/settings'
-    | '/settings/achievements'
-    | '/settings/user'
-    | '/settings/achievements/$id'
-  id:
-    | '__root__'
-    | '/'
-    | '/_auth'
-    | '/login'
-    | '/_auth/settings'
-    | '/_auth/settings/achievements'
-    | '/_auth/settings/user'
-    | '/_auth/settings/achievements/$id'
-  fileRoutesById: FileRoutesById
+	fileRoutesByFullPath: FileRoutesByFullPath;
+	fullPaths:
+		| "/"
+		| ""
+		| "/login"
+		| "/settings"
+		| "/settings/achievements"
+		| "/settings/user"
+		| "/settings/achievements/$id"
+		| "/settings/achievements/create";
+	fileRoutesByTo: FileRoutesByTo;
+	to:
+		| "/"
+		| ""
+		| "/login"
+		| "/settings"
+		| "/settings/achievements"
+		| "/settings/user"
+		| "/settings/achievements/$id"
+		| "/settings/achievements/create";
+	id:
+		| "__root__"
+		| "/"
+		| "/_auth"
+		| "/login"
+		| "/_auth/settings"
+		| "/_auth/settings/achievements"
+		| "/_auth/settings/user"
+		| "/_auth/settings/achievements/$id"
+		| "/_auth/settings/achievements/create";
+	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRouteWithChildren
-  LoginRoute: typeof LoginRoute
+	IndexRoute: typeof IndexRoute;
+	AuthRoute: typeof AuthRouteWithChildren;
+	LoginRoute: typeof LoginRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuthRoute: AuthRouteWithChildren,
-  LoginRoute: LoginRoute,
-}
+	IndexRoute: IndexRoute,
+	AuthRoute: AuthRouteWithChildren,
+	LoginRoute: LoginRoute,
+};
 
 export const routeTree = rootRoute
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+	._addFileChildren(rootRouteChildren)
+	._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 
@@ -251,7 +273,8 @@ export const routeTree = rootRoute
       "children": [
         "/_auth/settings/achievements",
         "/_auth/settings/user",
-        "/_auth/settings/achievements/$id"
+        "/_auth/settings/achievements/$id",
+        "/_auth/settings/achievements/create"
       ]
     },
     "/_auth/settings/achievements": {
@@ -264,6 +287,10 @@ export const routeTree = rootRoute
     },
     "/_auth/settings/achievements/$id": {
       "filePath": "_auth.settings.achievements_.$id.tsx",
+      "parent": "/_auth/settings"
+    },
+    "/_auth/settings/achievements/create": {
+      "filePath": "_auth.settings.achievements_.create.tsx",
       "parent": "/_auth/settings"
     }
   }

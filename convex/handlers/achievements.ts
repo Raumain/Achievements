@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
+import { getAuthUserId } from "@convex-dev/auth/server";
 
 export const getById = query({
 	args: { id: v.id("achievements") },
@@ -15,6 +16,75 @@ export const getAll = query({
 			.query("achievements")
 			.filter((q) => q.eq(q.field("createdBy"), args.userId))
 			.collect();
+	},
+});
+
+export const create = mutation({
+	args: {
+		name: v.string(),
+		description: v.string(),
+		category: v.string(),
+		timeInterval: v.union(
+			v.literal("day"),
+			v.literal("week"),
+			v.literal("month"),
+		),
+		startDate: v.string(), // ISO date string
+		endDate: v.string(), // ISO date string
+		boxColor: v.array(v.string()),
+	},
+	handler: async (ctx, args) => {
+		const userId = await getAuthUserId(ctx);
+		const start = new Date(args.startDate);
+		const end = new Date(args.endDate);
+		let totalBoxes = 0;
+
+		switch (args.timeInterval) {
+			case "day":
+				totalBoxes = Math.ceil(
+					(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24),
+				);
+				break;
+			case "week":
+				totalBoxes = Math.ceil(
+					(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 7),
+				);
+				break;
+			case "month":
+				totalBoxes =
+					(end.getFullYear() - start.getFullYear()) * 12 +
+					(end.getMonth() - start.getMonth()) +
+					1;
+				break;
+			default:
+				throw new Error("Intervalle de temps invalide");
+		}
+		const achievementId = await ctx.db.insert("achievements", {
+			...args,
+			totalBoxes,
+			createdBy: userId as string,
+			updatedAt: new Date().toISOString(),
+		});
+		Array.from({ length: totalBoxes }).map(async (_, i) => {
+			const currentDate = new Date(args.startDate);
+			switch (args.timeInterval) {
+				case "day":
+					currentDate.setDate(currentDate.getDate() + i);
+					break;
+				case "week":
+					currentDate.setDate(currentDate.getDate() + i * 7);
+					break;
+				case "month":
+					currentDate.setMonth(currentDate.getMonth() + i);
+					break;
+			}
+			const boxDate = currentDate.toISOString().split("T")[0];
+			await ctx.db.insert("boxes", {
+				color: "#242327",
+				date: boxDate,
+				achievementId,
+			});
+		});
 	},
 });
 
