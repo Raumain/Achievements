@@ -6,7 +6,7 @@ export const getAll = query({
 	handler: async (ctx, args) => {
 		return await ctx.db
 			.query("boxes")
-			.filter((q) => q.eq(q.field("achivementId"), args.achievementId))
+			.filter((q) => q.eq(q.field("achievementId"), args.achievementId))
 			.collect();
 	},
 });
@@ -17,7 +17,7 @@ export const create = mutation({
 			v.object({
 				color: v.string(),
 				date: v.string(),
-				achivementId: v.id("achievements"),
+				achievementId: v.id("achievements"),
 			}),
 		),
 	},

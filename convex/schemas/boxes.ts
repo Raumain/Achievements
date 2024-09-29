@@ -5,6 +5,6 @@ export const boxes = {
 	boxes: defineTable({
 		color: v.string(),
 		date: v.string(),
-		achivementId: v.id("achievements"),
+		achievementId: v.id("achievements"),
 	}),
 };
