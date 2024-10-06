@@ -9,7 +9,7 @@ export function AuthButton({ isLogged }: { isLogged: boolean }) {
 	return (
 		<button
 			type="button"
-			className="top-2 right-4 fixed btn"
+			className="top-4 right-4 z-10 fixed btn z"
 			disabled={isBusy}
 			onClick={() => {
 				setIsBusy(true);
