@@ -6,6 +6,7 @@ import { api } from "../../convex/_generated/api";
 import { convex } from "../main";
 import { PinnedFullIcon, PinnedIcon } from "../assets/icons";
 import type { Doc } from "../../convex/_generated/dataModel";
+import { boxColor } from "../helpers/boxColor";
 
 export const Route = createFileRoute("/_auth/achievements")({
 	component: () => <Achievements />,
@@ -128,14 +129,11 @@ const TrackerPreview = ({
 				<div key={box._id} className="tooltip" data-tip={box.date}>
 					<div
 						style={{
-							backgroundColor:
-								box.date === new Date().toISOString().split("T")[0]
-									? "#f170ffea"
-									: box.color,
+							backgroundColor: boxColor(box),
 						}}
-						className="border-slate-500 border rounded w-5 h-5"
+						className="flex flex-col justify-center items-center border-slate-500 border rounded w-5 h-5"
 					>
-						{""}
+						<small>{box.content}</small>
 					</div>
 				</div>
 			))}
