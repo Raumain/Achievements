@@ -7,10 +7,7 @@ export const Route = createFileRoute("/_auth/settings")({
 
 const Settings = () => {
 	return (
-		<div className="w-full h-full overflow-auto">
-			<div className="mb-4 w-full h-12">
-				<Menu />
-			</div>
+		<div className="w-full">
 			<Outlet />
 		</div>
 	);
