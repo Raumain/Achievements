@@ -13,20 +13,20 @@ export const Menu = () => {
 	return (
 		<div className="top-4 left-4 z-50 fixed">
 			<div className="gap-1 bg-base-200 shadow-lg p-2 sho tabs tabs-boxed">
-				<Tab link="/" icon={<HomeIcon />} text="Home" />
+				<Tab link="/achievements" icon={<HomeIcon />} text="Home" />
 				{pathname.includes("/settings") ? (
 					<>
-						<Tab link="/settings/user" icon={<UserIcon />} text="User" />
 						<Tab
 							link="/settings/achievements"
 							icon={<DashboardIcon />}
 							text="Achievements"
 						/>
+						<Tab link="/settings/user" icon={<UserIcon />} text="User" />
 					</>
 				) : (
 					isAuthenticated && (
 						<Tab
-							link="/settings/user"
+							link="/settings/achievements"
 							icon={<SettingsIcon />}
 							text="Settings"
 						/>
