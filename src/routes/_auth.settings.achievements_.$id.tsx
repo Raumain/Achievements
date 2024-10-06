@@ -29,7 +29,9 @@ const Dashboard = () => {
 		id: Id<"achievements">;
 		updatedData: AchievementUpdate;
 	}) => {
-		updateAchievement({ id, achievement: { ...updatedData } });
+		updateAchievement({ id, achievement: { ...updatedData } }).then(() =>
+			navigate({ to: "/settings/achievements" }),
+		);
 	};
 
 	const handleDelete = (id: Id<"achievements">) => {
