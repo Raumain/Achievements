@@ -6,7 +6,7 @@ import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { routeTree } from "./routeTree.gen";
 
 // @ts-ignore
-const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+export const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
 
 const router = createRouter({
 	routeTree,
