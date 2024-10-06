@@ -1,11 +1,6 @@
-import {
-	Link,
-	Outlet,
-	createRootRouteWithContext,
-} from "@tanstack/react-router";
+import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import "../index.css";
-import Navbar from "../components/Navbar";
 
 interface AuthContext {
 	auth:
@@ -23,8 +18,7 @@ export const Route = createRootRouteWithContext<AuthContext>()({
 function RootComponent() {
 	return (
 		<div className="bg-[#121212] w-full h-screen text-[#d6d6d6]">
-			{/* <Navbar /> */}
-			<div className="h-full">
+			<div className="h-full overflow-y-auto">
 				<Outlet />
 			</div>
 			<TanStackRouterDevtools position="bottom-right" />
