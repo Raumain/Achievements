@@ -4,3 +4,6 @@ export { DashboardIcon } from "./Dashboardcon";
 export { GitHubIcon } from "./GitHubIcon";
 export { LogoutIcon } from "./LogoutIcon";
 export { SettingsIcon } from "./SettingsIcon";
+export { PlusIcon } from "./PlusIcon";
+export { PinnedFullIcon } from "./PinnedFullIcon";
+export { PinnedIcon } from "./PinnedIcon";
