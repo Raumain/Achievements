@@ -32,6 +32,7 @@ export const create = mutation({
 		startDate: v.string(), // ISO date string
 		endDate: v.string(), // ISO date string
 		boxColor: v.array(v.string()),
+		isPinned: v.boolean(),
 	},
 	handler: async (ctx, args) => {
 		const userId = await getAuthUserId(ctx);
@@ -92,13 +93,23 @@ export const update = mutation({
 	args: {
 		id: v.id("achievements"),
 		achievement: v.object({
-			name: v.string(),
-			description: v.string(),
-			category: v.string(),
+			name: v.optional(v.string()),
+			description: v.optional(v.string()),
+			category: v.optional(v.string()),
+			timeInterval: v.optional(
+				v.union(v.literal("day"), v.literal("week"), v.literal("month")),
+			),
+			startDate: v.optional(v.string()), // ISO date string
+			endDate: v.optional(v.string()), // ISO date string
+			boxColor: v.optional(v.array(v.string())),
+			isPinned: v.optional(v.boolean()),
 		}),
 	},
 	handler: async (ctx, args) => {
-		return await ctx.db.patch(args.id, args.achievement);
+		return await ctx.db.patch(args.id, {
+			...args.achievement,
+			updatedAt: new Date().toISOString(),
+		});
 	},
 });
 
