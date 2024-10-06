@@ -14,15 +14,31 @@ The main goal of this application is to track achievements thanks to a visual la
 
 ## Roadmap
 
-- [ ] Create a personnal dashboard 
+- [x] Create a personnal dashboard 
     - [x] Add authentication with Convex
-    - [ ] Add/Update/Delete achievements
-    - [ ] Choose what temporality a box represent (day/week/month)
-    - [ ] Mark a box as succeded or failed
+    - [x] Add/Update/Delete achievements
+    - [x] Choose what temporality a box represent (day/week/month)
+    - [x] Mark a box as succeded or failed
 
-- [ ] Display every achievements
-- [ ] Display informations on boxes hover 
+- [x] Display every achievements
+- [x] Display informations on boxes hover
 
+- [ ] Achievements
+    - [ ] Fix pinned button bug 
+    - [ ] Fix box content not displaying "?" or "!"
+    - [ ] Allow to update more infos 
+    - [ ] Add a progress graph under the boxes
+    - [ ] Add a progress graph preview in achievements settings
+    - [ ] Allow deletion
+
+- [ ] Auth
+    - [ ] Add Github login button in login form
+    - [ ] Add Google provider
+    - [ ] Add appropriate icon on User Settings when user is logged with a provider (currently only github icon)
+
+- [ ] Landing page
+
+- [ ] Improve UI (very important)
 - [ ] Send a reminder to fill the box at every temporality chosen for a given achievement (PWA notification ? Mail ? Other ?)
 
 
