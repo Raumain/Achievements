@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["dist/", "convex/_generated/"]
+		"ignore": ["dist/", "convex/_generated/", "src/routeTree.gen.ts"]
 	},
 	"formatter": {
 		"enabled": true,
