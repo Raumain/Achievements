@@ -3,17 +3,21 @@ import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Menu } from "../components/Menu";
 import { AuthButton } from "../components/AuthButton";
+import type { Id } from "../../convex/_generated/dataModel";
 
 export const Route = createFileRoute("/")({
 	component: HomeComponent,
 });
 
 function HomeComponent() {
+	// NOTES :  This page is useless ATM, should be a landing page
 	const { isAuthenticated } = useConvexAuth();
-	const boxes = useQuery(api.running.get);
-	const user = useQuery(api.users.get);
+	const boxes = useQuery(api.handlers.boxes.getAll, {
+		achievementId: "k97bwy2868pqrnm944ze3h7s2x71n75m" as Id<"achievements">,
+	});
+	const user = useQuery(api.handlers.users.get);
 	return (
-		<div className="p-2">
+		<div className="p-2 h-full overflow-y-auto">
 			<Menu />
 			<AuthButton isLogged={isAuthenticated} />
 			<div className="flex flex-col items-center p-4">
@@ -25,14 +29,15 @@ function HomeComponent() {
 					</div>
 				)}
 			</div>
-			<div className="flex justify-center items-center p-24">
-				<div className="place-items-center gap-4 grid grid-cols-7 grid-rows-8">
-					{boxes?.map(({ _id, isFilled, weekNumber }) => (
+			<div className="flex justify-center items-center px-16 py-4">
+				<div className="flex flex-wrap items-center gap-4">
+					{boxes?.map(({ _id, color, date }) => (
 						<div
 							key={_id}
-							className={`flex flex-col justify-center items-center border-slate-500 border rounded w-12 h-12 ${isFilled ? "bg-slate-500" : ""}`}
+							style={{ backgroundColor: color }}
+							className="flex flex-col justify-center items-center border-slate-500 border rounded w-12 h-12"
 						>
-							<p>{weekNumber}</p>
+							{/* <p>{date}</p> */}
 						</div>
 					))}
 				</div>

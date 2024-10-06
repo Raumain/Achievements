@@ -9,7 +9,7 @@ export const Route = createFileRoute("/login")({
 
 const Login = () => {
 	const { isAuthenticated } = useConvexAuth();
-	const user = useQuery(api.users.get);
+	const user = useQuery(api.handlers.users.get);
 	return (
 		<div className="h-full">
 			<div className="flex justify-center items-center bg-base-200 min-h-screen">

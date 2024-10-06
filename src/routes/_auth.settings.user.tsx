@@ -9,8 +9,8 @@ export const Route = createFileRoute("/_auth/settings/user")({
 });
 
 const UserSettings = () => {
-	const user = useQuery(api.users.get);
-	const updateUser = useMutation(api.users.update);
+	const user = useQuery(api.handlers.users.get);
+	const updateUser = useMutation(api.handlers.users.update);
 	console.log(user);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,7 +22,7 @@ const UserSettings = () => {
 	};
 
 	return (
-		<div className="bg-slate-800 p-8">
+		<div className="p-8">
 			<h1 className="mb-6 font-bold text-3xl">User settings</h1>
 			{user ? (
 				<div className="bg-base-200 shadow-xl card">
