@@ -54,11 +54,11 @@ const SimpleBox = ({ box, i }: { box: Doc<"boxes">; i: number }) => (
 	<div className="tooltip" data-tip={box.date}>
 		<div
 			style={{
-				backgroundColor: boxColor(box),
+				backgroundColor: boxColor(box).color,
 			}}
 			className="relative flex flex-col justify-center items-center border-slate-500 border rounded w-10 h-10"
 		>
-			<small>{i + 1}</small>
+			<small>{i}</small>
 		</div>
 	</div>
 );
@@ -82,7 +82,7 @@ const BoxDrawer = ({ box, i }: { box: Doc<"boxes">; i: number }) => {
 				<div className="drawer-content">
 					<label
 						style={{
-							backgroundColor: boxColor(box),
+							backgroundColor: boxColor(box).color,
 						}}
 						htmlFor={`drawer-${i}`}
 						className="flex flex-col justify-center items-center border-slate-500 border rounded w-10 h-10 cursor-pointer drawer-button"

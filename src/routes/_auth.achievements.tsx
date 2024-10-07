@@ -129,11 +129,11 @@ const TrackerPreview = ({
 				<div key={box._id} className="tooltip" data-tip={box.date}>
 					<div
 						style={{
-							backgroundColor: boxColor(box),
+							backgroundColor: boxColor(box).color,
 						}}
 						className="flex flex-col justify-center items-center border-slate-500 border rounded w-5 h-5"
 					>
-						<small>{box.content}</small>
+						<small>{boxColor(box).content}</small>
 					</div>
 				</div>
 			))}

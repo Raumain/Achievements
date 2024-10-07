@@ -116,6 +116,10 @@ const CreateAchievement = () => {
 						<option value="week">Week</option>
 						<option value="month">Month</option>
 					</select>
+					<small className="mt-4 text-gray-600">
+						Note: If you choose "week" or "month" and want to start from now,
+						add a week or month to the start date.
+					</small>
 				</div>
 
 				<div className="gap-4 grid grid-cols-2 mb-4">
@@ -191,9 +195,9 @@ const CreateAchievement = () => {
 							</button>
 						)}
 					</div>
-					<p className="mt-4 text-gray-600 text-sm">
+					<small className="mt-4 text-gray-600">
 						Note: Add more colors for partial success/failure states.
-					</p>
+					</small>
 				</div>
 
 				<div className="flex justify-between">
