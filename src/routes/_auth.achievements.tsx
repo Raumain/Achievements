@@ -81,27 +81,30 @@ const AchievementCard = ({
 		...updateableAchievement
 	} = achievement;
 	return (
-		<Link to={`/achievements/${achievement._id}`}>
-			<div className="bg-base-100 h-60 transition-all duration-300 card hover:scale-105">
-				<div className="card-body">
-					<div className="flex justify-between items-start">
-						<h3 className="card-title">{achievement.name}</h3>
-						<button
-							type="button"
-							className="btn btn-circle btn-ghost"
-							onClick={() => {
-								convex.mutation(api.handlers.achievements.update, {
-									id: achievement._id,
-									achievement: {
-										...updateableAchievement,
-										isPinned: !isPinned,
-									},
-								});
-							}}
-						>
-							{isPinned ? <PinnedFullIcon /> : <PinnedIcon />}
-						</button>
-					</div>
+		<div className="bg-base-100 h-60 transition-all duration-300 card hover:scale-105">
+			<div className="card-body">
+				<div className="flex justify-between items-start">
+					<h3 className="card-title">{achievement.name}</h3>
+					<button
+						type="button"
+						className="btn btn-circle btn-ghost"
+						onClick={() => {
+							convex.mutation(api.handlers.achievements.update, {
+								id: achievement._id,
+								achievement: {
+									...updateableAchievement,
+									isPinned: !isPinned,
+								},
+							});
+						}}
+					>
+						{isPinned ? <PinnedFullIcon /> : <PinnedIcon />}
+					</button>
+				</div>
+				<Link
+					to={`/achievements/${achievement._id}`}
+					className="flex flex-col justify-between h-full"
+				>
 					<p>{achievement.description}</p>
 					<TrackerPreview achievement={achievement} />
 					<div className="justify-between items-center mt-4 card-actions">
@@ -110,9 +113,9 @@ const AchievementCard = ({
 							{new Date(achievement._creationTime).toLocaleDateString()}
 						</span>
 					</div>
-				</div>
+				</Link>
 			</div>
-		</Link>
+		</div>
 	);
 };
 
