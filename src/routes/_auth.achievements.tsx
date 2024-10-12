@@ -1,12 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Menu } from "../components/Menu";
-import { AuthButton } from "../components/AuthButton";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useConvexAuth, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { convex } from "../main";
-import { PinnedFullIcon, PinnedIcon } from "../assets/icons";
 import type { Doc } from "../../convex/_generated/dataModel";
+import { PinnedFullIcon, PinnedIcon } from "../assets/icons";
+import { AuthButton } from "../components/AuthButton";
+import { Menu } from "../components/Menu";
 import { boxColor } from "../helpers/boxColor";
+import { convex } from "../main";
 
 export const Route = createFileRoute("/_auth/achievements")({
 	component: () => <Achievements />,
@@ -132,7 +132,9 @@ const TrackerPreview = ({
 				<div key={box._id} className="tooltip" data-tip={box.date}>
 					<div
 						style={{
-							backgroundColor: boxColor(box).color,
+							borderWidth: "1px",
+							borderColor: boxColor(box).color,
+							backgroundColor: box.color,
 						}}
 						className="flex flex-col justify-center items-center border-slate-500 border rounded w-5 h-5"
 					>

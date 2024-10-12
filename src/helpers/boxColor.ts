@@ -15,7 +15,7 @@ export const boxColor = (box: Doc<"boxes">) => {
 	) {
 		color = "#f6ad55";
 		content = "!";
-	} else color = box.color || "transparent";
+	} else color = "#64748b";
 
 	return { color, content };
 };
