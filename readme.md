@@ -29,7 +29,7 @@ The main goal of this application is to track achievements thanks to a visual la
     - [x] Allow to update more infos 
     - [ ] Add a progress graph under the boxes
     - [ ] Add a progress graph preview in achievements settings
-    - [ ] Allow partial failure/success choice
+    - [x] Allow partial failure/success choice
     - [x] Allow deletion
 
 - [ ] Auth

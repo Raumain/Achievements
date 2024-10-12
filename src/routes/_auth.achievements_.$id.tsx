@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { convex } from "../main";
+import { useMutation, useQuery } from "convex/react";
+import { useRef } from "react";
 import { api } from "../../convex/_generated/api";
 import type { Doc, Id } from "../../convex/_generated/dataModel";
 import { boxColor } from "../helpers/boxColor";
-import { useMutation, useQuery } from "convex/react";
-import { useRef } from "react";
+import { convex } from "../main";
 
 export const Route = createFileRoute("/_auth/achievements/$id")({
 	component: () => <Achievement />,
@@ -101,38 +101,29 @@ const BoxDrawer = ({ box, i }: { box: Doc<"boxes">; i: number }) => {
 							Day n° {i} - {box.date}
 						</p>
 						<div className="flex justify-center items-center gap-2">
-							<button
-								type="button"
-								style={{ backgroundColor: achievement?.boxColor[0] }}
-								className="p-2 w-16 !h-8 !min-h-8 btn"
-								onClick={() => {
-									updateBox({
-										id: box._id,
-										box: {
-											content: "",
-											color: achievement?.boxColor[0],
-										},
-									}).then(() => checkboxRef.current?.click());
-								}}
-							>
-								Failed
-							</button>
-							<button
-								type="button"
-								style={{ backgroundColor: achievement?.boxColor[1] }}
-								className="p-2 w-16 !h-8 !min-h-8 btn"
-								onClick={() => {
-									updateBox({
-										id: box._id,
-										box: {
-											content: "",
-											color: achievement?.boxColor[1],
-										},
-									}).then(() => checkboxRef.current?.click());
-								}}
-							>
-								Success
-							</button>
+							{achievement?.boxColor.map((color, i) => (
+								<button
+									key={color}
+									type="button"
+									style={{ backgroundColor: achievement?.boxColor.at(i) }}
+									className="p-2 w-16 !h-8 !min-h-8 btn"
+									onClick={() => {
+										updateBox({
+											id: box._id,
+											box: {
+												content: "",
+												color: achievement?.boxColor.at(i),
+											},
+										}).then(() => checkboxRef.current?.click());
+									}}
+								>
+									{i === 0
+										? "Failed"
+										: i === achievement.boxColor.length - 1
+											? "Success"
+											: "Partial"}
+								</button>
+							))}
 						</div>
 					</div>
 				</div>
