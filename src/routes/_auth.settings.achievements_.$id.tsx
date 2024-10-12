@@ -15,9 +15,12 @@ const Dashboard = () => {
 	const achievement = useQuery(api.handlers.achievements.getById, {
 		id: id as Id<"achievements">,
 	});
+
 	const updateAchievement = useMutation(api.handlers.achievements.update);
+	const deleteAchievement = useMutation(api.handlers.achievements.deleteById);
 
 	const [colors, setColors] = useState<Map<number, string>>(new Map());
+	if (!achievement) return <></>;
 
 	const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -44,7 +47,16 @@ const Dashboard = () => {
 		});
 	};
 
-	if (!achievement) return <></>;
+	const handleDelete = () => {
+		if (
+			window.confirm("Êtes-vous sûr de vouloir supprimer cette réalisation ?")
+		) {
+			deleteAchievement({ id: achievement?._id }).then(() => {
+				navigate({ to: "/settings/achievements" });
+			});
+		}
+	};
+
 	return (
 		<div className="mx-auto px-4 py-8 container">
 			<h1 className="mb-8 font-bold text-3xl text-center">
@@ -93,7 +105,6 @@ const Dashboard = () => {
 									className="input text-right"
 								/>
 							</label>
-							{/* colors */}
 							<div className="mb-2">
 								<span className="form-label">Couleur</span>
 								<div className="flex gap-2">
@@ -117,19 +128,31 @@ const Dashboard = () => {
 									))}
 								</div>
 							</div>
-							<div className="flex justify-between">
-								<button type="submit" className="btn btn-primary">
-									Sauvegarder
-								</button>
+							<div className="flex items-center justify-between">
 								<button
 									type="button"
-									className="btn"
-									onClick={() => {
-										navigate({ to: "/settings/achievements" });
-									}}
+									className="btn bg-red-400 text-white"
+									onClick={handleDelete}
 								>
-									Annuler
+									Delete
 								</button>
+								<div className="join">
+									<button
+										type="button"
+										className="btn join-item min-w-20"
+										onClick={() => {
+											navigate({ to: "/settings/achievements" });
+										}}
+									>
+										Cancel
+									</button>
+									<button
+										type="submit"
+										className="btn join-item min-w-20 btn-primary"
+									>
+										Save
+									</button>
+								</div>
 							</div>
 						</form>
 					</div>
