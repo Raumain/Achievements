@@ -24,13 +24,13 @@ The main goal of this application is to track achievements thanks to a visual la
 - [x] Display informations on boxes hover
 
 - [ ] Achievements
-    - [ ] Fix pinned button bug 
-    - [ ] Fix box content not displaying "?" or "!"
-    - [ ] Allow to update more infos 
+    - [x] Fix pinned button bug 
+    - [x] Fix box content not displaying "?" or "!"
+    - [x] Allow to update more infos 
     - [ ] Add a progress graph under the boxes
     - [ ] Add a progress graph preview in achievements settings
     - [ ] Allow partial failure/success choice
-    - [ ] Allow deletion
+    - [x] Allow deletion
 
 - [ ] Auth
     - [ ] Add Github login button in login form
