@@ -1,17 +1,13 @@
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
+import { useState, type FormEvent } from "react";
+import ColorInput from "../components/ColorPicker";
 
 export const Route = createFileRoute("/_auth/settings/achievements/$id")({
 	component: () => <Dashboard />,
 });
-
-type AchievementUpdate = {
-	name: string;
-	description: string;
-	category: string;
-};
 
 const Dashboard = () => {
 	const { id } = Route.useParams();
@@ -20,26 +16,32 @@ const Dashboard = () => {
 		id: id as Id<"achievements">,
 	});
 	const updateAchievement = useMutation(api.handlers.achievements.update);
-	const deleteAchievement = useMutation(api.handlers.achievements.deleteById);
 
-	const handleUpdate = ({
-		id,
-		updatedData,
-	}: {
-		id: Id<"achievements">;
-		updatedData: AchievementUpdate;
-	}) => {
-		updateAchievement({ id, achievement: { ...updatedData } }).then(() =>
-			navigate({ to: "/settings/achievements" }),
-		);
-	};
+	const [colors, setColors] = useState<Map<number, string>>(new Map());
 
-	const handleDelete = (id: Id<"achievements">) => {
-		if (
-			window.confirm("Êtes-vous sûr de vouloir supprimer cette réalisation ?")
-		) {
-			deleteAchievement({ id });
-		}
+	const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const formData = new FormData(e.currentTarget);
+		const name = formData.get("name") as string;
+		const description = formData.get("description") as string;
+		const category = formData.get("category") as string;
+		const startDate = formData.get("startDate") as string;
+		const endDate = formData.get("endDate") as string;
+		const boxColor =
+			colors.size !== 0 ? Array.from(colors.values()) : achievement?.boxColor;
+		updateAchievement({
+			id: id as Id<"achievements">,
+			achievement: {
+				name,
+				description,
+				category,
+				startDate,
+				endDate,
+				boxColor,
+			},
+		}).then(() => {
+			navigate({ to: "/settings/achievements" });
+		});
 	};
 
 	if (!achievement) return <></>;
@@ -51,19 +53,7 @@ const Dashboard = () => {
 			<div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 				<div className="bg-base-100 shadow-xl card">
 					<div className="card-body">
-						<form
-							onSubmit={(e) => {
-								e.preventDefault();
-								const formData = new FormData(e.currentTarget);
-								const name = formData.get("name") as string;
-								const description = formData.get("description") as string;
-								const category = formData.get("category") as string;
-								handleUpdate({
-									id: id as Id<"achievements">,
-									updatedData: { name, description, category },
-								});
-							}}
-						>
+						<form onSubmit={handleUpdate}>
 							<input
 								name="name"
 								defaultValue={achievement.name}
@@ -79,6 +69,54 @@ const Dashboard = () => {
 								defaultValue={achievement.category}
 								className="mb-2 input-bordered w-full input"
 							/>
+							<label
+								htmlFor="endDate"
+								className="input-bordered w-full pl-3 pr-0 py-3 flex items-center justify-between input mb-2"
+							>
+								<span className="">Start date :</span>
+								<input
+									name="startDate"
+									type="date"
+									defaultValue={achievement.startDate}
+									className="input text-right"
+								/>
+							</label>
+							<label
+								htmlFor="endDate"
+								className="input-bordered w-full pl-3 pr-0 py-3 flex items-center justify-between input mb-2"
+							>
+								<span className="">End date :</span>
+								<input
+									name="endDate"
+									type="date"
+									defaultValue={achievement.endDate}
+									className="input text-right"
+								/>
+							</label>
+							{/* colors */}
+							<div className="mb-2">
+								<span className="form-label">Couleur</span>
+								<div className="flex gap-2">
+									{achievement.boxColor.map((color, i) => (
+										<ColorInput
+											key={color}
+											initialColor={color}
+											onChange={(e) => {
+												const newColors = new Map(
+													colors.size === 0
+														? achievement.boxColor.map((color, index) => [
+																index,
+																color,
+															])
+														: colors,
+												);
+												newColors.set(i, e);
+												setColors(newColors);
+											}}
+										/>
+									))}
+								</div>
+							</div>
 							<div className="flex justify-between">
 								<button type="submit" className="btn btn-primary">
 									Sauvegarder
