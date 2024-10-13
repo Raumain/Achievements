@@ -32,10 +32,24 @@ The main goal of this application is to track achievements thanks to a visual la
     - [x] Allow partial failure/success choice
     - [x] Allow deletion
 
+- [ ] Backend
+    - [ ] Switch to Bun/Elysia
+    - [ ] Postres Database
+    - [ ] Find a way to implement auth 
+
+- [ ] Frontend
+    - [ ] TanStack Query
+    - [ ] Handle loading state 
+
 - [ ] Auth
     - [ ] Add Github login button in login form
     - [ ] Add Google provider
     - [ ] Add appropriate icon on User Settings when user is logged with a provider (currently only github icon)
+
+- [ ] Features
+    - [ ] Allow users to create routines (repeated achievements every day/week/month) with auto reset of the achievement and history
+    - [ ] Create personnal notes that only the owner of the achievement can see (for each box and for an achievement)
+    - [ ] Graphs for different metrics (global achievement -> every achievements, for routines, etc)
 
 - [ ] Landing page
 
